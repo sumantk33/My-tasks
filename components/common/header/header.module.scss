@@ -1,0 +1,32 @@
+@import '@/styles/main.scss';
+
+.headerWrapper {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $border-color;
+
+  .container {
+    @include pageWidth;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.leftWrapper {
+  display: flex;
+  align-items: center;
+
+  .headerIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: .5rem;
+  }
+
+  .appTitle {
+    @include typography(h7, ultrabold);
+  }
+}

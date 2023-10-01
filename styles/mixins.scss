@@ -1,0 +1,5 @@
+@import './variables.scss';
+
+@mixin pageWidth {
+  max-width: $max-width;
+}
