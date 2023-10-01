@@ -1,0 +1,18 @@
+@import '@/styles/main.scss';
+
+.button {
+  border: 0;
+  cursor: pointer;
+  padding: .4rem .7rem;
+  border-radius: .3rem;
+}
+
+.primaryBtn {
+  background-color: $primary;
+  color: $primary-foreground;
+}
+
+.outlineBtn {
+  background-color: transparent;
+  border: 1px solid $border-color;
+}
