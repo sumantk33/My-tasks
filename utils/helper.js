@@ -26,3 +26,24 @@ export const validateEmail = (email) => {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 };
+
+export const toastConfig = (status, title, description = null) => {
+  return {
+    title,
+    description,
+    status,
+    duration: 5000,
+    isClosable: true,
+    position: 'bottom-right',
+    variant: 'left-accent',
+  }
+}
+
+export const TOAST_TYPES = {
+  SUCCESS: 'success',
+  ERROR: 'error'
+}
+
+export const BUTTON_TYPES = {
+  OUTLINE: 'outline'
+}

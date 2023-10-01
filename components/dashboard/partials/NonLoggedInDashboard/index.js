@@ -1,7 +1,7 @@
-import Button from '@/components/common/Button';
 import { useRouter } from 'next/router';
 import React from 'react'
 import styles from './nonlogged.module.scss';
+import { Button } from '@chakra-ui/button';
 
 const NonLoggedInDashboard = () => {
   const router = useRouter();
@@ -13,7 +13,11 @@ const NonLoggedInDashboard = () => {
       <div className={styles.description}>
         You can now maintain and visually analyze your tasks.
       </div>
-      <Button onClick={() => router.push('/login')} className={styles.getStartedButton}>Get started</Button>
+      <Button
+        onClick={() => router.push('/login')}
+      >
+        Get Started!
+      </Button>
     </div>
   )
 }

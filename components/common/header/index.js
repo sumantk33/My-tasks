@@ -1,6 +1,10 @@
+'use client'
+
 import { useAuth } from '@/context/AuthContext';
+import { BUTTON_TYPES, toastConfig, TOAST_TYPES } from '@/utils/helper';
+import { Button } from '@chakra-ui/button';
+import { useToast } from '@chakra-ui/toast';
 import { useRouter } from 'next/router';
-import Button, { BTN_VARIANTS } from '../Button';
 import styles from './header.module.scss';
 
 const HeaderIcon = () => {
@@ -29,15 +33,24 @@ const HeaderIcon = () => {
 const Header = () => {
   const { user, logout } = useAuth();
   const router = useRouter();
+  const toast = useToast();
+
+  const handleLogout = () => {
+    try {
+      logout();
+      toast(toastConfig(TOAST_TYPES.SUCCESS, 'Logged out!'))
+    } catch(err) {
+      toast(toastConfig(TOAST_TYPES.ERROR, 'Oops!', err.message))
+    }
+  }
+
+  const ctaAction = user ? handleLogout : () => router.push('/login');
+  const ctaText = user ? 'Logout' : 'Login';
   return (
     <header className={styles.headerWrapper}>
       <div className={styles.container}>
         <HeaderIcon />
-        {!user ? (
-          <Button onClick={() => router.push('/login')} variant={BTN_VARIANTS.OUTLINE}>Login</Button>
-        ) : (
-          <Button onClick={logout} variant={BTN_VARIANTS.OUTLINE}>Logout</Button>
-        )}
+        <Button onClick={ctaAction} variant={BUTTON_TYPES.OUTLINE} size='sm'>{ctaText}</Button>
       </div>
     </header>
   )

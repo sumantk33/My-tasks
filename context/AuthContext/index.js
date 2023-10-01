@@ -22,21 +22,30 @@ const AuthProvider = ({ children }) => {
     setAccessToken(session?.access_token || null);
   }, [supabase]);
 
-  const login = useCallback(async (email, password) => {
-    const { error, data } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    setAccessToken(data.access_token);
-
-    if (!error) {
-      router.push('/');
-    }
-
-  }, [router, supabase.auth]);
+  const login = useCallback((email, password) => {
+    return new Promise(async (resolve, reject) => {
+      const { error, data } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      setAccessToken(data.access_token);
+      if (!error) {
+        resolve();
+      } else {
+        reject(error);
+      }
+    })
+  }, [supabase.auth]);
 
   const logout = useCallback(async () => {
-    supabase.auth.signOut();
+    return new Promise(async (resolve, reject) => {
+      const { error } =  supabase.auth.signOut();
+      if (!error) {
+        resolve();
+      } else {
+        reject(error);
+      }
+    })
   }, [supabase.auth]);
 
   useEffect(() => {
