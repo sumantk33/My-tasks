@@ -2,3 +2,8 @@ $max-width: var(--max-width);
 $border-color: hsl(var(--border));
 $primary: hsl(var(--primary));
 $primary-foreground: hsl(var(--primary-foreground));
+$muted: hsl(var(--muted));
+$muted-foreground: hsl(var(--muted-foreground));
+$bg-color: hsl(var(--background));
+
+$header-height: 3rem;

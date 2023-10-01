@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react'
 import { useRouter } from 'next/navigation';
@@ -10,11 +12,13 @@ const AuthProvider = ({ children }) => {
   const router = useRouter();
   const user = useUser();
   const [accessToken, setAccessToken] = useState(null);
+  const [reqInProgress, setReqInProgress] = useState(true);
 
   const fetchSession = useCallback(async () => {
     const {
       data: { session },
     } = await supabase.auth.getSession();
+    setReqInProgress(false);
     setAccessToken(session?.access_token || null);
   }, [supabase]);
 
@@ -56,11 +60,14 @@ const AuthProvider = ({ children }) => {
     user,
     supabase,
     login,
-    logout
-  }), [login, supabase, user, logout]);
+    logout,
+    reqInProgress
+  }), [login, supabase, user, logout, reqInProgress]);
 
   return (
-    <AuthContext.Provider value={ctxProps}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={ctxProps}>
+      {children}
+    </AuthContext.Provider>
   )
 };
 

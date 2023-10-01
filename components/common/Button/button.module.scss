@@ -16,3 +16,9 @@
   background-color: transparent;
   border: 1px solid $border-color;
 }
+
+.disabled {
+  background-color: $muted;
+  color: $muted-foreground;
+  pointer-events: none;
+}

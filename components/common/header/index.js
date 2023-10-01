@@ -1,7 +1,6 @@
 import { useAuth } from '@/context/AuthContext';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Button from '../Button';
+import Button, { BTN_VARIANTS } from '../Button';
 import styles from './header.module.scss';
 
 const HeaderIcon = () => {
@@ -29,14 +28,15 @@ const HeaderIcon = () => {
 
 const Header = () => {
   const { user, logout } = useAuth();
+  const router = useRouter();
   return (
     <header className={styles.headerWrapper}>
       <div className={styles.container}>
         <HeaderIcon />
         {!user ? (
-          <Link href="/login">Login</Link>
+          <Button onClick={() => router.push('/login')} variant={BTN_VARIANTS.OUTLINE}>Login</Button>
         ) : (
-          <Button onClick={logout}>Logout</Button>
+          <Button onClick={logout} variant={BTN_VARIANTS.OUTLINE}>Logout</Button>
         )}
       </div>
     </header>

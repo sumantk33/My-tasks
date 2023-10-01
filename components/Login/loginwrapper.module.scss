@@ -1,0 +1,32 @@
+@import '@/styles/main.scss';
+
+.loginWrapper {
+  @include pageWidth;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  height: calc(100vh - $header-height);
+}
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-color;
+  min-width: 25rem;
+}
+
+.title {
+  @include typography(h5, semibold);
+  text-align: center;
+}
+
+.inputClass {
+  margin-top: 2rem;
+}
+
+.loginCta {
+  margin: 2rem auto 0.5rem auto;
+}
