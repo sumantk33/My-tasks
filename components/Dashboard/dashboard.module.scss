@@ -1,0 +1,23 @@
+@import '@/styles/main.scss';
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+
+  @include respond(phone) {
+    display: none;
+  }
+}
+
+.description {
+  @include pageWidth;
+  display: inherit;
+  justify-content: inherit;
+  align-items: inherit;
+  font-size: 0.85rem;
+  width: 100%;
+  z-index: 2;
+}
