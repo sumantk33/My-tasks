@@ -61,13 +61,35 @@ export const formatBoardResponse = (categories, tasks) => {
       tasks: []
     }
   })
+  const tasksObj = {}
   tasks.forEach(task => {
-    formattedBoardData[task.category].tasks.push(task)
+    tasksObj[task.id] = task;
   })
   Object.entries(formattedBoardData).forEach(([key, value]) => {
-    formattedBoardData[key].tasks = value.tasks.sort((a, b) => ascendingSort(a, b, 'order'))
+    const completedTasks = []
+    const pendingTasks = []
+    formattedBoardData[key].tasksList.forEach(item => {
+      const { is_completed } = tasksObj[item];
+      if (!is_completed) {
+        pendingTasks.push(tasksObj[item])
+      } else {
+        completedTasks.push(tasksObj[item])
+      }
+    })
+    formattedBoardData[key].tasks = pendingTasks
+    formattedBoardData[key].completedTasks = completedTasks;
+    formattedBoardData[key].totalTasksCount = formattedBoardData[key].tasks?.length;
+    formattedBoardData[key].completedTasksCount = completedTasks?.length;
   })
   return { categories: formattedBoardData };
+}
+
+export const getHighestOrder = (categories) => {
+  let highestOrder = 0;
+  categories.forEach(category => {
+    highestOrder = Math.max(category.order, highestOrder)
+  })
+  return highestOrder;
 }
 
 // 
@@ -86,4 +108,14 @@ export const BUTTON_TYPES = {
 export const DB_ENUMS = {
   CATEGORIES: 'categories',
   TASKS: 'tasks',
+}
+
+export const DB_COLUMNS = {
+  IS_COMPLETED: 'is_completed',
+  ID: 'id',
+  NAME: 'name',
+  TASKS_LIST: 'tasksList',
+  CATEGORY: 'category',
+  ORDER: 'order',
+  TITLE: 'title'
 }

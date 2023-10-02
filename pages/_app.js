@@ -23,9 +23,9 @@ export default function App({ Component, pageProps }) {
         <CacheProvider>
           <ChakraProvider theme={theme}>
             <AuthProvider>
+              <Meta />
+              <Header />
               <DataProvider>
-                <Meta />
-                <Header />
                 <Component {...pageProps} />
               </DataProvider>
             </AuthProvider>

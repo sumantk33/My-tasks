@@ -16,6 +16,10 @@
   border-radius: 0.5rem;
   border: 1px solid $border-color;
   min-width: 25rem;
+
+  @include respond(phone) {
+    min-width: auto;
+  }
 }
 
 .title {

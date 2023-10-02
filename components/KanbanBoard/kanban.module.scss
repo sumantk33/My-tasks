@@ -1,0 +1,6 @@
+@import '@/styles/main.scss';
+
+.wrapper {
+  height: calc(100vh - $header-height);
+  overflow-x: auto;
+}
