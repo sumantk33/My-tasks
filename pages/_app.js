@@ -8,6 +8,9 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { CacheProvider } from '@chakra-ui/next-js'
 import { theme } from '@/utils/theme'
 import Header from '@/components/common/header'
+import DataProvider from '@/context/DataContext'
+
+export const revalidate = 0;
 
 export default function App({ Component, pageProps }) {
   const [supabaseClient] = useState(() => createPagesBrowserClient())
@@ -20,9 +23,11 @@ export default function App({ Component, pageProps }) {
         <CacheProvider>
           <ChakraProvider theme={theme}>
             <AuthProvider>
-              <Meta />
-              <Header />
-              <Component {...pageProps} />
+              <DataProvider>
+                <Meta />
+                <Header />
+                <Component {...pageProps} />
+              </DataProvider>
             </AuthProvider>
           </ChakraProvider>
         </CacheProvider>

@@ -1,3 +1,7 @@
+//
+//  Util Fns
+//
+
 export const mergeClassNames = (classNamesArr = [], customClasses = {}) => {
   const classes = classNamesArr.map(item => item);
 
@@ -39,6 +43,24 @@ export const toastConfig = (status, title, description = null) => {
   }
 }
 
+export const formatBoardResponse = (categories, tasks) => {
+  const formattedBoardData = {};
+  categories.forEach(category => {
+    formattedBoardData[category.id] = {
+      ...category,
+      tasks: []
+    }
+  })
+  tasks.forEach(task => {
+    formattedBoardData[task.category].tasks.push(task)
+  })
+  return { categories: formattedBoardData };
+}
+
+// 
+//  Enums 
+//
+
 export const TOAST_TYPES = {
   SUCCESS: 'success',
   ERROR: 'error'
@@ -46,4 +68,9 @@ export const TOAST_TYPES = {
 
 export const BUTTON_TYPES = {
   OUTLINE: 'outline'
+}
+
+export const DB_ENUMS = {
+  CATEGORIES: 'categories',
+  TASKS: 'tasks',
 }
