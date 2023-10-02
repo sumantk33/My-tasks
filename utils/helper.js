@@ -43,6 +43,16 @@ export const toastConfig = (status, title, description = null) => {
   }
 }
 
+const ascendingSort = (a, b, key) => {
+  if (a[key] < b[key]){
+    return -1;
+  }
+  if (a[key] > b[key]){
+    return 1;
+  }
+  return 0;
+}
+
 export const formatBoardResponse = (categories, tasks) => {
   const formattedBoardData = {};
   categories.forEach(category => {
@@ -53,6 +63,9 @@ export const formatBoardResponse = (categories, tasks) => {
   })
   tasks.forEach(task => {
     formattedBoardData[task.category].tasks.push(task)
+  })
+  Object.entries(formattedBoardData).forEach(([key, value]) => {
+    formattedBoardData[key].tasks = value.tasks.sort((a, b) => ascendingSort(a, b, 'order'))
   })
   return { categories: formattedBoardData };
 }

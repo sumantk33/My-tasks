@@ -44,6 +44,7 @@ const DataProvider = ({ children }) => {
         const { error: errorCtg, data: dataCtg } = await supabase
           .from(DB_ENUMS.CATEGORIES)
           .select()
+          .order('id', { ascending: true })
         const { error: errorTasks, data: dataTasks } = await supabase
           .from(DB_ENUMS.TASKS)
           .select();
